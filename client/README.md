@@ -1,6 +1,6 @@
-# Available Scripts
+# Client - Available Scripts
 
-In the project directory, you can run:
+In /client you can run:
 
 ## `npm start`
 
