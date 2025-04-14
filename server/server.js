@@ -13,9 +13,6 @@ app.use(express.json());
 // Routes
 const albumsRoutes = require('./routes/albums');
 app.use('/api/albums', albumsRoutes);
-console.log(`Route ${albumsRoutes} registriert.`);
-
-console.log(app.routes);
 
 // Server starten
 app.listen(PORT, () => {
