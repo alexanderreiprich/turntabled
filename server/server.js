@@ -12,9 +12,12 @@ app.use(express.json());
 
 // Routes
 const albumsRoutes = require('./routes/albums');
+const usersRoutes = require('./routes/users');
+
 app.use('/api/albums', albumsRoutes);
+app.use('/api/users', usersRoutes);
 
 // Server starten
 app.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`);
+  console.log(`Server runs on port ${PORT}`);
 });
