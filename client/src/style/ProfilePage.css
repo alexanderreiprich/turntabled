@@ -1,0 +1,19 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-default);
+}
+
+.profile-paper {
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  background-color: var(--background-paper);
+  color: var(--text-primary);
+}
+
+.logout-button {
+  margin-top: 1rem;
+}
