@@ -111,7 +111,7 @@ router.get('/me', async (req, res) => {
     
     // Benutzerinformationen abrufen
     const [users] = await pool.query(
-      'SELECT id, username, email FROM users WHERE id = ?',
+      'SELECT * FROM users WHERE id = ?',
       [decoded.userId]
     );
 

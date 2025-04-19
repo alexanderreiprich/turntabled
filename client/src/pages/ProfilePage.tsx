@@ -1,9 +1,11 @@
 import React from "react";
-import { Typography, Paper } from "@mui/material";
+import { Typography, Paper, Box } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import LogoutButton from "../components/LogoutButton";
 import "../style/ProfilePage.css";
+import ProfilePageCollections from "../components/ProfilePageCollections";
+import ProfilePageFriends from "../components/ProfilePageFriends";
 
 const ProfilePage: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
@@ -14,17 +16,44 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div className="profile-container">
-      <div className="profile-paper">
-        <Typography variant="h4" component="h1" gutterBottom>
-          Profile
-        </Typography>
-        <Typography variant="h6">Welcome, {user?.username}!</Typography>
-        <div className="logout-button">
+    <Box className="profile-container">
+      <Paper className="profile-paper" elevation={3}>
+        <Box className="profile-content">
+          <Box className="profile-image-container">
+            <img
+              className="profile-image"
+              src={user?.profile_image || "/images/default_profile_image.png"}
+              alt="Profilbild"
+            />
+            <Box>
+              <Typography
+                variant="h2"
+                component="h1"
+                className="profile-username"
+              >
+                {user?.username}
+              </Typography>
+            </Box>
+          </Box>
+          <Box className="profile-subheader-container">
+            <Typography variant="h3" component="h3" className="profile-subheader-text">
+              Collections
+            </Typography>
+            <ProfilePageCollections />
+          </Box>
+          <Box className="profile-subheader-container">
+            <Typography variant="h3" component="h3" className="profile-subheader-text">
+              Friends
+            </Typography>
+            <ProfilePageFriends />
+          </Box>
+        </Box>
+
+        {/* <Box sx={{ mt: 4 }}>
           <LogoutButton />
-        </div>
-      </div>
-    </div>
+        </Box> */}
+      </Paper>
+    </Box>
   );
 };
 

@@ -1,13 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import ProfilePage from "./pages/ProfilePage";
 import theme from "./theme";
 import Home from "./pages/Home";
+import Header from "./components/Header";
+import SearchPage from "./pages/SearchPage";
+import CommunityPage from "./pages/CommunityPage";
+
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { user } = useAuth();
+  
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
+};
 
 function App() {
   return (
@@ -16,10 +34,40 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <ProtectedRoute>
+                  <SearchPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/community"
+              element={
+                <ProtectedRoute>
+                  <CommunityPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Router>
       </AuthProvider>
