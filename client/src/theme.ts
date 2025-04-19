@@ -10,6 +10,7 @@ const theme = createTheme({
     },
     background: {
       default: '#1F2041', // Darkblue Background
+      paper: '#2a2b52', // Darkblue Paper
     },
     text: {
       primary: '#FFF8F0', // White Text
